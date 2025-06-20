@@ -33,12 +33,4 @@ public class NotificationDeliveryController {
         }
     }
 
-    @PostMapping("/newNotification")
-    public void postNewNotification(@RequestBody NotificationRequest notificationRequest) {
-        System.out.println("Received the notification");
-        Notification notification = new Notification();
-        notification.setMessage(notificationRequest.getNotification());
-        notificationService.newNotification(notification);
-    }
-
 }
