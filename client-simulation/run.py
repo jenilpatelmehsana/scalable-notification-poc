@@ -57,7 +57,7 @@ def send_notification():
         notification_client.request(
             "POST",
             POST_NOTIFICATION_ENDPOINT,
-            body=json.dumps(NOTIFICATION_BODY),  # Fix: use json.dumps
+            body=json.dumps(NOTIFICATION_BODY),
             headers=headers
         )
         response = notification_client.getresponse()
