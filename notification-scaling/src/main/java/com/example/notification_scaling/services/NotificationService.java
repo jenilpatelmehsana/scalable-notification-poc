@@ -24,12 +24,15 @@ public class NotificationService {
             Notification newNotification = this.notifications.poll();
             Long currentTime = System.currentTimeMillis();
             if (newNotification != null) { // deliver the notification
-                while(!this.waiters.isEmpty()) {
-                    INotificationWaiter deliveryWaiter = this.waiters.poll();
-                    if (deliveryWaiter != null && deliveryWaiter.getStartTime() - currentTime < NO_RESPONSE_DELAY) {
-                        deliveryWaiter.deliverNotification(newNotification);
+                this.waiters.parallelStream().forEach(w -> {
+                    if (w != null && w.getStartTime() - currentTime < NO_RESPONSE_DELAY) {
+                        w.deliverNotification(newNotification);
                     }
-                }
+                });
+                this.waiters.clear();
+//                while(!this.waiters.isEmpty()) {
+//
+//                }
             } else {    // send back all the waiters waiting for notification empty handed
                 if (currentTime - waiter.getStartTime() < NO_RESPONSE_DELAY) {  // find all
                     while (!this.waiters.isEmpty()) {
