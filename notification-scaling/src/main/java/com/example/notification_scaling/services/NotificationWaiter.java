@@ -18,7 +18,7 @@ public class NotificationWaiter implements INotificationWaiter {
     public void waitOnThread() {
         synchronized (this.thread) {
             try {
-                this.thread.wait(200000);
+                this.thread.wait(20000);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }

@@ -8,7 +8,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 @Service
 public class NotificationService {
 
-    private static final Long NO_RESPONSE_DELAY = 180000L;  // 3 MINs
+    private static final Long NO_RESPONSE_DELAY = 18000L;  // 3 MINs
 
     private ArrayBlockingQueue<Notification> notifications;
 
